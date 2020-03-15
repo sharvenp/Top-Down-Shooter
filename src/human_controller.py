@@ -1,6 +1,5 @@
 
 from controller import Controller
-from settings import Settings
 
 import pygame as pg
 

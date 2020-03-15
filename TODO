@@ -6,10 +6,12 @@ Todo:
   ✔ Enemies and Enemy Behaviour @done(20-03-14 01:26)
   ✔ Spawing System @done(20-03-14 02:01)
   ✔ Twin Stick Shooting @done(20-03-14 02:06)
-  ☐ Sprites and FX
+  ✘ Sprites and FX @cancelled(20-03-14 13:24)
   ☐ Collision Detection 
+  ☐ Health System
   ☐ Score System
   ☐ Simple AI
   ☐ Map Creation
-  ☐ Finishing FX (End screen, etc.)
+  ☐ Path-Finding for Enemies
+  ✘ Finishing FX (End screen, etc.) @cancelled(20-03-14 13:24)
   ☐ Reinforcment Learning

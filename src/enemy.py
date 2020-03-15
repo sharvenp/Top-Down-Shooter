@@ -1,8 +1,7 @@
 
 from controllable import Controllable
-from settings import Settings
-from bullet import Bullet
 from utils import Utils
+from settings import Settings
 
 import pygame as pg
 

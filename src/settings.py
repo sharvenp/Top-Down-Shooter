@@ -9,7 +9,10 @@ class Settings:
 
 
     # Colors
-
+    BACKGROUND_COLOR = (30, 0, 0)
+    BULLET_COLOR_PLAYER = (255, 255, 80)
+    PLAYER_COLOR = (80, 255, 80)
+    ENEMY_COLOR = (255, 80, 80)
 
     # Fonts
 
@@ -17,19 +20,15 @@ class Settings:
     BULLET_SIZE = 3
     BULLET_SPEED = 200
     SHOOT_START_DIST = 15
-    BULLET_COLOR_PLAYER = (255, 255, 80)
-    BULLET_COLOR_ENEMY = (80, 255, 255)
 
     # Player Attributes
     PLAYER_SIZE = 6
     PLAYER_MOVEMENT_SPEED = 100
     PLAYER_TURN_SPEED = 300
-    PLAYER_COLOR = (80, 255, 80)
 
     # Enemy Attributes
     ENEMY_SIZE = 8
     ENEMY_MOVEMENT_SPEED = 30
-    ENEMY_COLOR = (255, 80, 80)
 
     # Spawner Attributes
     SPAWN_INTERVAL = 300

@@ -1,10 +1,10 @@
 
-from gui_element import GUI_ELEMENT
+from game_object import GameObject
 
-class Controllable(GUI_ELEMENT):
+class Controllable(GameObject):
 
     def __init__(self):
-        GUI_ELEMENT.__init__(self)
+        GameObject.__init__(self)
 
     def attach_controller(self, controller):
         self.controller = controller

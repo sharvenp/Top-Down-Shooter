@@ -1,7 +1,7 @@
 
-from settings import Settings
 from enemy import Enemy
 from enemy_controller import EnemyController
+from settings import Settings
 from utils import Utils
 
 import random

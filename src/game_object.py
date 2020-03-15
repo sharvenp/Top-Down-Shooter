@@ -1,5 +1,5 @@
 
-class GUI_ELEMENT:
+class GameObject:
 
     def __init__(self):
         self.destroyed = False

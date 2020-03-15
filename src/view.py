@@ -31,14 +31,11 @@ class View:
 
     def _render_all(self):
 
-        self.screen.fill((0,0,0))
+        self.screen.fill(Settings.BACKGROUND_COLOR)
 
-        all_objs = []
         for key in self.env:
-            all_objs += self.env[key]
-
-        for obj in all_objs:
-            obj.render(self.screen)
+            for obj in self.env[key]:
+                obj.render(self.screen)
 
     def _delete_element(self, delete_lst):
 
