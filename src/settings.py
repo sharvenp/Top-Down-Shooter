@@ -2,14 +2,14 @@
 class Settings:
 
     # Screen
-    WIDTH = 500
-    HEIGHT = 500
+    WIDTH = 600
+    HEIGHT = 600
     FRAME_RATE = 30
     DELTA_TIME = 1/FRAME_RATE
 
 
     # Colors
-    BACKGROUND_COLOR = (30, 0, 0)
+    FLOOR_COLOR = (30, 0, 0)
     BULLET_COLOR_PLAYER = (255, 255, 80)
     PLAYER_COLOR = (80, 80, 255)
     ENEMY_COLOR = (255, 80, 80)

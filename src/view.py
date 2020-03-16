@@ -9,6 +9,7 @@ from settings import Settings
 
 import pygame as pg
 import time as t
+from PIL import Image
 
 class View:
 
@@ -19,7 +20,7 @@ class View:
 
     def _render_all(self):
 
-        self.screen.fill(Settings.BACKGROUND_COLOR)
+        self.screen.fill(Settings.FLOOR_COLOR)
 
         for key in self.env:
             for obj in self.env[key]:
