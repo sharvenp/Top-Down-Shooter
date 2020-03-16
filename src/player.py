@@ -14,6 +14,7 @@ class Player(Controllable, Collideable, Health):
         Controllable.__init__(self, 0, position, 0)
         Collideable.__init__(self, Settings.PLAYER_SIZE)
         Health.__init__(self, Settings.PLAYER_HEALTH)
+        self.score = 0
 
     def move(self, direction):
 

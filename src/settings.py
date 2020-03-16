@@ -27,6 +27,7 @@ class Settings:
     PLAYER_TURN_SPEED = 300
     PLAYER_HEALTH = 2000
     PLAYER_DAMAGE = 15
+    KILL_SCORE = 30
 
     # Enemy Attributes
     ENEMY_SIZE = 8

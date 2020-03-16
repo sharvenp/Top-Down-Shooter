@@ -2,6 +2,7 @@
 from spawner import Spawner
 from player import Player
 from enemy import Enemy
+from score_manager import ScoreManager
 from human_controller import HumanController
 from enemy_controller import EnemyController
 from settings import Settings
@@ -24,7 +25,7 @@ class View:
             for obj in self.env[key]:
                 obj.render(self.screen)
 
-    def _delete_element(self, delete_lst):
+    def _delete_elements(self, delete_lst):
 
         for ele_tup in delete_lst:
             element, key = ele_tup
@@ -41,12 +42,13 @@ class View:
 
             player = Player((Settings.WIDTH//2, Settings.HEIGHT//2))
             player_controller = player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
-            players = [player]
 
             # 0: Players, 1: Player Projectiles, 2: Enemies, 3: Enemy Projectiles
-            self.env = {0:players, 1:[], 2:[], 3:[]}
+            self.env = {0:[player], 1:[], 2:[], 3:[]}
 
             self.spawner = Spawner(self.env)
+
+            ScoreManager.SCORE = 0
 
             while True:
     
@@ -83,7 +85,7 @@ class View:
                         else: # Projectile
                             obj.step()
 
-                self._delete_element(deleted_elements)
+                self._delete_elements(deleted_elements)
 
                 self.spawner.spawn()
 
@@ -91,5 +93,5 @@ class View:
                 pg.display.update()
                 t.sleep(Settings.DELTA_TIME)
 
-            print("Game Over")
+            print(f"Game Over. Score: {ScoreManager.SCORE}")
 

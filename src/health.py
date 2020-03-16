@@ -1,5 +1,6 @@
 
 from settings import Settings
+from score_manager import ScoreManager
 
 class Health:
 
@@ -16,3 +17,7 @@ class Health:
         if self.health <= 0:
             self.health = 0
             self.destroyed = True
+
+            if self.tag == 2: # Enemy
+                for player in self.players:
+                    ScoreManager.SCORE += Settings.KILL_SCORE
