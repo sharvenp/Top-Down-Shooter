@@ -15,9 +15,7 @@ class Spawner:
         
         self.curr_bound = Settings.SPAWN_BOUND_START
 
-
     def spawn(self):
-        self.ticks += 1
 
         if self.ticks % Settings.SPAWN_INTERVAL == 0:
 
@@ -37,3 +35,5 @@ class Spawner:
             self.curr_bound *= Settings.GROWTH_FACTOR
             if Settings.DEBUG:
                 print(f"Update Spawn Bound: {self.curr_bound}")
+        
+        self.ticks += 1

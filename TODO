@@ -7,8 +7,8 @@ Todo:
   ✔ Spawing System @done(20-03-14 02:01)
   ✔ Twin Stick Shooting @done(20-03-14 02:06)
   ✘ Sprites and FX @cancelled(20-03-14 13:24)
-  ☐ Collision Detection 
-  ☐ Health System
+  ✔ Collision Detection @done(20-03-15 20:11)
+  ✔ Health System @done(20-03-15 20:29)
   ☐ Score System
   ☐ Simple AI
   ☐ Map Creation

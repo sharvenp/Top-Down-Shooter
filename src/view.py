@@ -16,19 +16,6 @@ class View:
         self.screen = pg.display.set_mode((Settings.WIDTH, Settings.HEIGHT))    
         pg.display.set_caption("Top Down Shooter")
 
-        player = Player((Settings.WIDTH//2, Settings.HEIGHT//2))
-        player_controller = player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
-
-        players = [player]
-        
-        enemy = Enemy((50, 50), players)
-        enemy.attach_controller(EnemyController(enemy))
-        
-        # 0: Players, 1: Player Projectiles, 2: Enemies, 3: Enemy Projectiles
-        self.env = {0:players, 1:[], 2:[enemy], 3:[]}
-
-        self.spawner = Spawner(self.env)
-
     def _render_all(self):
 
         self.screen.fill(Settings.BACKGROUND_COLOR)
@@ -51,30 +38,58 @@ class View:
     def run(self):
 
         while True:
- 
-            e = pg.event.poll()
 
-            if (e.type == pg.QUIT):
-                quit(0)
+            player = Player((Settings.WIDTH//2, Settings.HEIGHT//2))
+            player_controller = player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
+            players = [player]
 
-            deleted_elements = []
+            # 0: Players, 1: Player Projectiles, 2: Enemies, 3: Enemy Projectiles
+            self.env = {0:players, 1:[], 2:[], 3:[]}
 
-            for key in self.env:
-                for obj in self.env[key]:
-                    if obj.destroyed:
-                        deleted_elements.append((obj, key))
-                        continue
-                    
-                    if key % 2 == 0: # Controllable
-                        obj.controller.handle(e, self.env)
-                    else: # Projectile
-                        obj.step()
+            self.spawner = Spawner(self.env)
 
-            self._delete_element(deleted_elements)
+            while True:
+    
+                e = pg.event.poll()
 
-            self.spawner.spawn()
+                if (e.type == pg.QUIT):
+                    quit(0)
+                
+                if len(self.env[0]) == 0:
+                    break 
 
-            self._render_all()
-            pg.display.update()
-            t.sleep(Settings.DELTA_TIME)
+                deleted_elements = []
+                collidable_elements = []
+        
+                # Check Collisions
+                for key in self.env:
+                    collidable_elements += self.env[key]
+                for i in range(len(collidable_elements)):
+                    for j in range(i+1, len(collidable_elements)):
+                        result = collidable_elements[i].check_collide(collidable_elements[j])
+                        if (result):
+                            collidable_elements[i].on_collide(collidable_elements[j])
+                            collidable_elements[j].on_collide(collidable_elements[i])
+
+                # Handle all GameObjects
+                for key in self.env:
+                    for obj in self.env[key]:
+                        if obj.destroyed:
+                            deleted_elements.append((obj, key))
+                            continue
+                        
+                        if key % 2 == 0: # Controllable
+                            obj.controller.handle(e, self.env)
+                        else: # Projectile
+                            obj.step()
+
+                self._delete_element(deleted_elements)
+
+                self.spawner.spawn()
+
+                self._render_all()
+                pg.display.update()
+                t.sleep(Settings.DELTA_TIME)
+
+            print("Game Over")
 

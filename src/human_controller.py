@@ -28,5 +28,5 @@ class HumanController(Controller):
                 env[1].append(bullet)
 
         if sign:
-            angle = self.controlled_object.look_angle
+            angle = self.controlled_object.rotation
             self.controlled_object.move(sign)        
