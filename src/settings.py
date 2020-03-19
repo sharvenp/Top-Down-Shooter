@@ -13,8 +13,6 @@ class Settings:
     PLAYER_COLOR = (80, 80, 255)
     ENEMY_COLOR = (255, 80, 80)
 
-    # Fonts
-
     # Bullet Attributes
     BULLET_SIZE = 2
     BULLET_SPEED = 8
@@ -29,7 +27,7 @@ class Settings:
     LR = 0.0008
     GAMMA = 0.99
     SAVE_INTERVAL = 50
-    SAVE_DIRECTORY = '../models/'
+    SAVE_DIRECTORY = "../models"
     LOAD_MOST_RECENT_MODEL = False
     KILL_REWARD = 20
     ALIVE_REWARD = 1

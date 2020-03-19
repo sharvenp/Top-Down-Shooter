@@ -134,5 +134,5 @@ class AgentController(Controller):
             if bullet:
                 env[1].append(bullet)
 
-        # self.states.append(np.asarray(x))
-        # self.actions.append(action)
+        self.states.append(np.asarray(x))
+        self.actions.append(action)

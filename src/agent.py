@@ -70,7 +70,7 @@ class Agent:
                 self._load_model(self.model_directory+"/"+fn)
             else:
                 print(colored('FATAL: MODELS DIRECTORY EMPTY', 'red')) 
-                quit(0)
+                exit(1)
                 
     def _load_model(self, directory):
         # Load a keras agent
@@ -120,12 +120,13 @@ class Agent:
         self.training_function([S, action_onehot, discount_reward])
 
     def train_episode(self, s, a, r, game, save=True):
-
         # Wrapper for _train that also saves
+
         if s and a and r:
-            # Theres a bug where len(r) > len(s) so quick kludge around it
-            while len(r) > len(s): 
-                r.pop()    
+            if not (len(r) == len(s) == len(a)): 
+                print("States, Actions and Rewards do not have the same size")
+                exit(1)
+
             states = np.asarray(s)
             actions = np.asarray(a)
             rewards = np.asarray(r)

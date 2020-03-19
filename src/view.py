@@ -99,7 +99,7 @@ class View:
                 
                 self._delete_elements(deleted_elements)
 
-                if not self.env[0]: # Player dead
+                if player.destroyed: # Player dead
                     player.controller.add_reward(Settings.DIE_REWARD)                    
                     break
                 else:
@@ -107,7 +107,8 @@ class View:
                     if ScoreManager.TRIGGER:
                         reward += Settings.KILL_REWARD
                     player.controller.add_reward(reward)
-                    
+
+
                 self.spawner.spawn()
 
                 self._render_all()
@@ -118,7 +119,7 @@ class View:
                 player.controller.train_wrapper(episode)
                 elapsed_time = t.time() - start_time    
                 time_str = t.strftime("%H:%M:%S", t.gmtime(elapsed_time)) 
-                output_string = "Episode: {:0>7} Score: {:0>3} Reward: {:0>6} T+: {}".format(episode, ScoreManager.SCORE, sum(player.controller.rewards), time_str)
+                output_string = "Episode: {:0>5} Score: {:0>3} Reward: {:0>6} T+: {}".format(episode, ScoreManager.SCORE, sum(player.controller.rewards), time_str)
                 print(output_string)
             else:
                 print(f"Game Over. Score: {ScoreManager.SCORE}")
