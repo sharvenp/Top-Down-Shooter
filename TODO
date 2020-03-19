@@ -13,4 +13,7 @@ Todo:
   ✘ Map Creation @cancelled(20-03-15 21:32)
   ✘ Path-Finding for Enemies @cancelled(20-03-15 21:32)
   ✘ Finishing FX (End screen, etc.) @cancelled(20-03-14 13:24)
-  ☐ Reinforcment Learning
+  ✔ Raycasting System @done(20-03-18 22:16)
+  ✔ Reinforcment Learning @done(20-03-18 22:16)
+  ☐ Ammo and Pickup System
+  ☐ Reinforement Learning with Ammo System

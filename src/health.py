@@ -21,3 +21,4 @@ class Health:
             if self.tag == 2: # Enemy
                 for player in self.players:
                     ScoreManager.SCORE += Settings.KILL_SCORE
+                    ScoreManager.TRIGGER = 1

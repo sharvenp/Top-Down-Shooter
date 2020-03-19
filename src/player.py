@@ -15,6 +15,14 @@ class Player(Controllable, Collideable, Health):
         Collideable.__init__(self, Settings.PLAYER_SIZE)
         Health.__init__(self, Settings.PLAYER_HEALTH)
         self.score = 0
+        self.ray_data = []
+
+    def reset(self, position):
+        self.destroyed = False
+        self.health = Settings.PLAYER_HEALTH
+        self.position = position
+        self.rotation = 0
+        self.ray_data = []
 
     def move(self, direction):
 
@@ -30,11 +38,9 @@ class Player(Controllable, Collideable, Health):
 
         self.position = (nx, ny)
 
-    def turn(self):
+    def turn(self, angle):
 
-        mpos = pg.mouse.get_pos()
-        angle = Utils.get_look_angle(self.position, mpos)
-        self.rotation = angle % 360
+        self.rotation = angle
 
         if Settings.DEBUG:
             print(f"New Player Angle: {self.rotation}")
@@ -48,12 +54,23 @@ class Player(Controllable, Collideable, Health):
         bullet = Bullet((nx, ny), self.rotation, Settings.BULLET_SPEED, Settings.BULLET_COLOR_PLAYER)
         return bullet
 
-
     def render(self, screen):
         pg.draw.circle(screen, Settings.PLAYER_COLOR, self.position, Settings.PLAYER_SIZE)
 
         nx, ny = Utils.direction_position(self.position, self.rotation, Settings.SHOOT_START_DIST)
         pg.draw.line(screen, Settings.PLAYER_COLOR, self.position, (nx, ny), 3)
+
+        if Settings.AGENT_DEBUG and self.ray_data:
+            for ray in self.ray_data:
+                blocks, hit_type = ray
+                for block in blocks:
+                    bx, by = block
+                    c = (255, 0, 255)
+                    if hit_type:
+                        c = (255, 255, 255)
+                    pg.draw.rect(screen, c, (bx, by, 1, 1)) 
+
+            pg.draw.circle(screen, (0, 255, 0), self.position, Settings.AWARENESS_RANGE, 1)
 
     def on_collide(self, other):
         pass

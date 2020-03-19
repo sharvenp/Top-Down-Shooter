@@ -5,6 +5,7 @@ from enemy import Enemy
 from score_manager import ScoreManager
 from human_controller import HumanController
 from enemy_controller import EnemyController
+from agent_controller import AgentController
 from settings import Settings
 
 import pygame as pg
@@ -26,6 +27,8 @@ class View:
             for obj in self.env[key]:
                 obj.render(self.screen)
 
+        pg.display.update()
+
     def _delete_elements(self, delete_lst):
 
         for ele_tup in delete_lst:
@@ -39,30 +42,38 @@ class View:
 
     def run(self):
 
+        player = Player((Settings.WIDTH//2, Settings.HEIGHT//2))
+        if Settings.AGENT_PLAYER:
+            player.attach_controller(AgentController(player)) 
+        else:
+            player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
+        
+        episode = 0
+        start_time = t.time()
+
         while True:
 
-            player = Player((Settings.WIDTH//2, Settings.HEIGHT//2))
-            player_controller = player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
+            player.reset((Settings.WIDTH//2, Settings.HEIGHT//2))
 
+            if Settings.AGENT_PLAYER:
+                player.controller.reset_training_data()
+                                        
             # 0: Players, 1: Player Projectiles, 2: Enemies, 3: Enemy Projectiles
             self.env = {0:[player], 1:[], 2:[], 3:[]}
-
             self.spawner = Spawner(self.env)
 
             ScoreManager.SCORE = 0
 
             while True:
-    
+
                 e = pg.event.poll()
 
                 if (e.type == pg.QUIT):
                     quit(0)
                 
-                if len(self.env[0]) == 0:
-                    break 
-
                 deleted_elements = []
                 collidable_elements = []
+                ScoreManager.TRIGGER = 0
         
                 # Check Collisions
                 for key in self.env:
@@ -85,14 +96,30 @@ class View:
                             obj.controller.handle(e, self.env)
                         else: # Projectile
                             obj.step()
-
+                
                 self._delete_elements(deleted_elements)
 
+                if not self.env[0]: # Player dead
+                    player.controller.add_reward(Settings.DIE_REWARD)                    
+                    break
+                else:
+                    reward = Settings.ALIVE_REWARD
+                    if ScoreManager.TRIGGER:
+                        reward += Settings.KILL_REWARD
+                    player.controller.add_reward(reward)
+                    
                 self.spawner.spawn()
 
                 self._render_all()
-                pg.display.update()
-                t.sleep(Settings.DELTA_TIME)
+                # t.sleep(1/Settings.FRAME_RATE)
 
-            print(f"Game Over. Score: {ScoreManager.SCORE}")
+            if Settings.AGENT_PLAYER:
+                episode += 1
+                player.controller.train_wrapper(episode)
+                elapsed_time = t.time() - start_time    
+                time_str = t.strftime("%H:%M:%S", t.gmtime(elapsed_time)) 
+                output_string = "Episode: {:0>7} Score: {:0>3} Reward: {:0>6} T+: {}".format(episode, ScoreManager.SCORE, sum(player.controller.rewards), time_str)
+                print(output_string)
+            else:
+                print(f"Game Over. Score: {ScoreManager.SCORE}")
 

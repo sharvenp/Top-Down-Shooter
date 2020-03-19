@@ -1,5 +1,6 @@
 
 from controller import Controller
+from utils import Utils
 
 import pygame as pg
 
@@ -20,7 +21,9 @@ class HumanController(Controller):
         if keys[self.control_scheme["BACKWARD"]]:
             sign = -1
             
-        self.controlled_object.turn()
+        mpos = pg.mouse.get_pos()
+        angle = Utils.get_look_angle(self.controlled_object.position, mpos)
+        self.controlled_object.turn(angle % 360)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             bullet = self.controlled_object.shoot()
