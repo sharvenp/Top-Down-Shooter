@@ -26,9 +26,10 @@ class HumanController(Controller):
         self.controlled_object.turn(angle % 360)
 
         if event.type == pg.MOUSEBUTTONDOWN:
-            bullet = self.controlled_object.shoot()
-            if bullet:
-                env[1].append(bullet)
+            # bullet = self.controlled_object.shoot()
+            # if bullet:
+            #     env[1].append(bullet)
+            self.controlled_object.shoot(env[2])
 
         if sign:
             angle = self.controlled_object.rotation

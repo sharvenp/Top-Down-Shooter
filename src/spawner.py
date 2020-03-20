@@ -33,6 +33,9 @@ class Spawner:
         if self.ticks % Settings.GROWTH_INTERVAL == 0:
 
             self.curr_bound *= Settings.GROWTH_FACTOR
+
+            self.curr_bound = min(self.curr_bound, Settings.SPAWN_UPPER_BOUND) # Clamp it
+
             if Settings.DEBUG:
                 print(f"Update Spawn Bound: {self.curr_bound}")
         

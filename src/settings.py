@@ -4,7 +4,7 @@ class Settings:
     # Screen
     WIDTH = 600
     HEIGHT = 600
-    FRAME_RATE = 144
+    FRAME_RATE = 60
     DELTA_TIME = 1
 
     # Colors
@@ -23,14 +23,14 @@ class Settings:
     NUM_RAYS = 20
     FOV_RANGE = 250
     AWARENESS_RANGE = 150
-    ARCHITECTURE =  [(41, ''), (23, 'relu'), (23, 'relu'), (5, 'softmax')]
+    ARCHITECTURE =  [(42, ''), (23, 'relu'), (23, 'relu'), (5, 'softmax')]
     LR = 0.0008
     GAMMA = 0.99
     SAVE_INTERVAL = 50
     SAVE_DIRECTORY = "../models"
     LOAD_MOST_RECENT_MODEL = False
-    KILL_REWARD = 20
-    ALIVE_REWARD = 1
+    KILL_REWARD = 100
+    ALIVE_REWARD = 0.5
     DIE_REWARD = -500
 
     # Player Attributes
@@ -39,21 +39,24 @@ class Settings:
     PLAYER_TURN_SPEED = 15
     PLAYER_HEALTH = 2000
     PLAYER_DAMAGE = 30
-    KILL_SCORE = 30
+    PLAYER_SHOOT_RANGE = 300
+    KILL_SCORE = 1
 
     # Enemy Attributes
     ENEMY_SIZE = 8
     ENEMY_MOVEMENT_SPEED = 2
     ENEMY_HEALTH = 50
     ENEMY_DAMAGE = 5
+    ENEMY_MIN_DISTANCE = 20
 
     # Spawner Attributes
     SPAWN_INTERVAL = 200
-    GROWTH_INTERVAL = 600
-    GROWTH_FACTOR = 1.2
+    GROWTH_INTERVAL = 800
+    GROWTH_FACTOR = 1.4
     SPAWN_BOUND_START = 4
+    SPAWN_UPPER_BOUND = 10
 
     # Misc
-    AGENT_DEBUG = 0
+    AGENT_DEBUG = 1
     AGENT_PLAYER = True
     DEBUG = 0

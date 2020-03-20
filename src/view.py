@@ -48,8 +48,9 @@ class View:
         else:
             player.attach_controller(HumanController(player, {"FORWARD":pg.K_w, "BACKWARD":pg.K_s}))
         
-        episode = 0
-        start_time = t.time()
+        if Settings.AGENT_PLAYER:
+            episode = player.controller.agent.current_episode
+            start_time = t.time()
 
         while True:
 
@@ -98,16 +99,17 @@ class View:
                             obj.step()
                 
                 self._delete_elements(deleted_elements)
-
+                
                 if player.destroyed: # Player dead
-                    player.controller.add_reward(Settings.DIE_REWARD)                    
+                    if Settings.AGENT_PLAYER:
+                        player.controller.add_reward(Settings.DIE_REWARD)                    
                     break
                 else:
-                    reward = Settings.ALIVE_REWARD
-                    if ScoreManager.TRIGGER:
-                        reward += Settings.KILL_REWARD
-                    player.controller.add_reward(reward)
-
+                    if Settings.AGENT_PLAYER:
+                        reward = Settings.ALIVE_REWARD
+                        if ScoreManager.TRIGGER:
+                            reward += Settings.KILL_REWARD
+                        player.controller.add_reward(reward)
 
                 self.spawner.spawn()
 
@@ -119,7 +121,7 @@ class View:
                 player.controller.train_wrapper(episode)
                 elapsed_time = t.time() - start_time    
                 time_str = t.strftime("%H:%M:%S", t.gmtime(elapsed_time)) 
-                output_string = "Episode: {:0>5} Score: {:0>3} Reward: {:0>6} T+: {}".format(episode, ScoreManager.SCORE, sum(player.controller.rewards), time_str)
+                output_string = "Episode: {:0>4} Score: {:0>5} Reward: {:07.3f} T+: {}".format(episode, ScoreManager.SCORE, sum(player.controller.rewards), time_str)
                 print(output_string)
             else:
                 print(f"Game Over. Score: {ScoreManager.SCORE}")

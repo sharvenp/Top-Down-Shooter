@@ -15,7 +15,7 @@ class Enemy(Controllable, Collideable, Health):
         Health.__init__(self, Settings.ENEMY_HEALTH)
         self.players = players
 
-        self.min_distance = Settings.ENEMY_SIZE + 4
+        self.min_distance = Settings.ENEMY_SIZE + Settings.ENEMY_MIN_DISTANCE
 
     def move(self):
         d = float('inf')

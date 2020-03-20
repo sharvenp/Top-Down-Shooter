@@ -1,0 +1,10 @@
+- Episode 400: 
+	- Agent learned to run away in order to survive
+	- While running away, it learned to shoot any enemy that comes in front of it
+
+====
+
+- Episode 400:
+	- Agent learned wierd stratergy where it walks backwards through enemies and shoots them when
+	they appear in front of it
+	- Gets up to 37 kills

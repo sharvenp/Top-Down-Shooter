@@ -41,46 +41,6 @@ class AgentController(Controller):
     def train_wrapper(self, episode):
         self.agent.train_episode(self.states, self.actions, self.rewards, episode)
 
-    def cast_ray(self, pos, angle, enemies):
-    
-        # Append all blocks that are not on a wall
-        x, y = pos
-        dx = math.cos(math.radians(angle)) * Settings.FOV_RANGE
-        dy = math.sin(math.radians(angle)) * Settings.FOV_RANGE
-
-        blocks = Utils.get_raycast_blocks(x, y, round(x + dx), round(y + dy))
-
-        new_blocks = []
-        hit_type = 0
-
-        if blocks[0] != (x, y):
-            blocks = blocks[::-1]
-
-        for block in blocks:
-
-            c, r = block
-
-            if not ((0 <= c < Settings.WIDTH) and (0 <= r < Settings.HEIGHT)):
-                hit_type = 1
-                break
-            
-            if Utils.get_distance((x, y), (c, r)) > Settings.FOV_RANGE:
-                break
-            
-            enemy_hit_check = False
-            for enemy in enemies:
-                if Utils.get_distance((c, r), enemy.position) <= Settings.ENEMY_SIZE:
-                    enemy_hit_check = True
-                    break
-            
-            if enemy_hit_check:
-                hit_type = 2
-                break
-
-            new_blocks.append(block)
-            
-        return new_blocks, hit_type
-
     def handle(self, event, env):
         
         x = []
@@ -94,7 +54,7 @@ class AgentController(Controller):
         ray_data = []
 
         for ray in range(Settings.NUM_RAYS):
-            blocks, hit_type = self.cast_ray(self.controlled_object.position, curr_angle, env[2])
+            blocks, hit_type = self.controlled_object.cast_ray(self.controlled_object.position, curr_angle, env[2], Settings.FOV_RANGE)
             ray_data.append((blocks, hit_type))
             curr_angle += delta
             curr_angle %= 360
@@ -103,7 +63,11 @@ class AgentController(Controller):
                 x1.append(Utils.get_distance(blocks[-1], self.controlled_object.position) / Settings.FOV_RANGE)
             else:
                 x1.append(0)
-            x2.append(hit_type/2)
+
+            if type(hit_type) == int:
+                x2.append(hit_type/2)
+            else:
+                x2.append(1)
 
 
         self.controlled_object.ray_data = ray_data
@@ -117,7 +81,7 @@ class AgentController(Controller):
         if total > 0:
             awareness_value = count / total
 
-        x = x1 + x2 + [awareness_value]
+        x = x1 + x2 + [awareness_value] + [self.controlled_object.health / Settings.PLAYER_HEALTH]
 
         action = self.agent.get_state_action(x)
 
@@ -130,9 +94,11 @@ class AgentController(Controller):
         elif action == 3:
             self.controlled_object.move(-1)
         elif action == 4:
-            bullet = self.controlled_object.shoot()
-            if bullet:
-                env[1].append(bullet)
+            # bullet = self.controlled_object.shoot()
+            # if bullet:
+            #     env[1].append(bullet)
+            self.controlled_object.shoot(env[2])
+
 
         self.states.append(np.asarray(x))
         self.actions.append(action)
