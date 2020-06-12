@@ -28,7 +28,7 @@ class Settings:
     GAMMA = 0.99
     SAVE_INTERVAL = 50
     SAVE_DIRECTORY = "../models"
-    LOAD_MOST_RECENT_MODEL = False
+    LOAD_MOST_RECENT_MODEL = True
     KILL_REWARD = 100
     ALIVE_REWARD = 0.5
     DIE_REWARD = -500
