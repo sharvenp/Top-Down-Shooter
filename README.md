@@ -8,14 +8,14 @@ Used this game as a playground to teach ML agents to learn how to play top-down 
 ## Training
 The agent played around 550 games and was saved at a checkpoint of 50 games. Below are some GIFs showing the agent at various stages of training. Note that all these models were put in the same testing environment with the same `random.seed` to avoid any biases.
 
-## Model architecture
+### Model architecture
 The model is a standated fully-connected MLP with the following architecture:
 - Input: 42 neurons (explained below)
 - Hidden Layer 1: 23 neurons (ReLU)
 - Hidden Layer 2: 23 neurons (ReLU)
 - Output: 5 neurons (softmax)
 
-## Input explanation
+### Input explanation
 The agent has a field-of-view angle of 120° and casts 20 rays in front of it that travels a distance of 250 units. The results of these raycasts is concatenated in a way where the left array contains the **normalized distances** of the objects hit by the raycast and the right array contains the **type of the object hit** (enemy, wall, nothing) by the raycast, encoded as a floating point value. 
 
 Then the agent has an "awareness range" of 150 units. The allows the agent to be aware of the enemies around it, but it won't be able to pin-point its location without the raycasts. The awareness value is calulated by counting the number of enemies within this awareness range and dividing it by the total enemies on the map. This awareness value is then appended to the array mentioned above.
@@ -29,7 +29,7 @@ A visual example of what the agent sees:
   <img width="50%" height="50%" src="readme_resources/vision.PNG">
 </p>
 
-## Output explanation
+### Output explanation
 The agent outputs a 5-dimensional probability distribution and its action is sampled from that. The action based on the chosen indices is as follows:
 - 0 - turn left
 - 1 - turn right
