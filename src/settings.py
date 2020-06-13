@@ -29,7 +29,7 @@ class Settings:
     SAVE_INTERVAL = 50
     SAVE_DIRECTORY = "../models"
     LOAD_MOST_RECENT_MODEL = False
-    LOAD_MODEL_EPISODE = 550
+    LOAD_MODEL_EPISODE = 0
     KILL_REWARD = 100
     ALIVE_REWARD = 0.5
     DIE_REWARD = -500

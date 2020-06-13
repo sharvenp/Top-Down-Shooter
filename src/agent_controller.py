@@ -31,8 +31,8 @@ class AgentController(Controller):
                            Settings.LOAD_MOST_RECENT_MODEL, Settings.SAVE_DIRECTORY)
 
 
-        if not Settings.LOAD_MOST_RECENT_MODEL:
-            self.agent._load_model(f"../models/chkpnt-{Settings.LOAD_MODEL_EPISODE}.h5")
+        # if not Settings.LOAD_MOST_RECENT_MODEL:
+        #     self.agent._load_model(f"../models/chkpnt-{Settings.LO}.h5")
 
     def reset_training_data(self):        
         self.states = []
