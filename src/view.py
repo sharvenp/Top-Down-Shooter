@@ -117,6 +117,8 @@ class View:
 
                 self._render_all()
 
+                # Use to control the frame rate of the game
+                # Disable while training to make training faster
                 # t.sleep(1/Settings.FRAME_RATE)
                 
                 # Use to save screen:

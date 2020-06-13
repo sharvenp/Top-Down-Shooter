@@ -14,6 +14,8 @@ class Settings:
     ENEMY_COLOR = (255, 80, 80)
 
     # Bullet Attributes
+    # Used for the projectile type of bullet
+    # Currently the game uses a laser instead to keep agent rewards aligned with the action
     BULLET_SIZE = 2
     BULLET_SPEED = 8
     SHOOT_START_DIST = 15

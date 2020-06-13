@@ -83,7 +83,7 @@ The agent outputs a 5-dimensional probability distribution and its action is sam
 
 ---
 
-**This is the most trained agent and has played 550 games. It's final strategy is to continuously walk backwards while shooting any enemies in its sight with precision. There is no player-enemy collision, hence by walking backwards it goes through enemies where they will then apear in front of it as it passes through them. It then uses this chance to shoot the enemy. This is not a good strategy as it get dangerously close to the enemy where the agent loses a lot of health, but nevertheless, the agent thinks this is a good stratergy and it has scored a lot of points using this strategy.**
+**This is the most trained agent and has played 550 games. It's final strategy is to continuously walk backwards while shooting any enemies in its sight with precision. There is no player-enemy collision, hence by walking backwards it goes through enemies where they will then appear in front of it as it passes through them. It then uses this chance to shoot the enemy. This is not a good strategy as it get dangerously close to the enemy where the agent loses a lot of health, but nevertheless, the agent thinks this is a good stratergy and it has scored a lot of points using this strategy.**
 <p align="center">
   <img width="50%" height="50%" src="readme_resources/550.gif">
 </p>
