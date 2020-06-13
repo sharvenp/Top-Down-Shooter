@@ -23,8 +23,10 @@ Then the agent has an "awareness range" of 150 units. The allows the agent to be
 Lastly, the agents current normalized health is also appended to the array. This 20 + 20 + 1 + 1 = 42 dimensional array or vector is then fed into the agent. 
 
 A visual example of what the agent sees:
+- The green circle is the awareness range
+- The various lines are the raycasts
 <p align="center">
-  <img width="75%" height="75%" src="readme_resources/vision.PNG">
+  <img width="50%" height="50%" src="readme_resources/vision.PNG">
 </p>
 
 ## Output explanation
