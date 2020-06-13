@@ -28,11 +28,12 @@ class Settings:
     GAMMA = 0.99
     SAVE_INTERVAL = 50
     SAVE_DIRECTORY = "../models"
-    LOAD_MOST_RECENT_MODEL = False
-    LOAD_MODEL_EPISODE = 0
+    LOAD_MOST_RECENT_MODEL = True
+    LOAD_MODEL_EPISODE = 0 # Use to load specific model, LOAD_MOST_RECENT_MODEL has to be False
     KILL_REWARD = 100
     ALIVE_REWARD = 0.5
     DIE_REWARD = -500
+    TRAINING_MODE = 0 # 0 - Testing mode, 1 - Training mode
 
     # Player Attributes
     PLAYER_SIZE = 6
@@ -48,7 +49,7 @@ class Settings:
     ENEMY_MOVEMENT_SPEED = 2
     ENEMY_HEALTH = 50
     ENEMY_DAMAGE = 5
-    ENEMY_MIN_DISTANCE = 20
+    ENEMY_MIN_DISTANCE = 20 # Minimum distance for enemy to start damaging player
 
     # Spawner Attributes
     SPAWN_INTERVAL = 200
@@ -58,6 +59,6 @@ class Settings:
     SPAWN_UPPER_BOUND = 10
 
     # Misc
-    AGENT_DEBUG = 0
-    AGENT_PLAYER = True
-    DEBUG = 0
+    AGENT_DEBUG = 1 # Enable agent debug gizmos
+    AGENT_PLAYER = True  # True - Game played by Agent, False - Game player by user
+    DEBUG = 0 # Enable debug logging in the terminal

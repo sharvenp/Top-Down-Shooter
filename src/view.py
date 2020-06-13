@@ -116,13 +116,14 @@ class View:
                 self.spawner.spawn()
 
                 self._render_all()
+
                 # t.sleep(1/Settings.FRAME_RATE)
-                l += 1
-                pg.image.save(self.screen, f"../resources/generated_images/{Settings.LOAD_MODEL_EPISODE}/model-{Settings.LOAD_MODEL_EPISODE}-{l}.png")
+                
+                # Use to save screen:
+                # l += 1
+                # pg.image.save(self.screen, f"../resources/generated_images/{Settings.LOAD_MODEL_EPISODE}/model-{Settings.LOAD_MODEL_EPISODE}-{l}.png")
 
-
-            exit(0)
-            if Settings.AGENT_PLAYER:
+            if Settings.AGENT_PLAYER and Settings.TRAINING_MODE:
                 episode += 1
                 player.controller.train_wrapper(episode)
                 elapsed_time = t.time() - start_time    
