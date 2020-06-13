@@ -1,4 +1,4 @@
-# Top Down Shooter
+# Top Down Shooter AI
 
 ## About
 Top Down Shooter game implemented in Python3 with PyGame. The goal of this game is to survive for as long as possible by shooting the enemies as they swarm around the player.
