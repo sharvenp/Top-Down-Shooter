@@ -110,25 +110,27 @@ class Player(Controllable, Collideable, Health):
         pg.draw.line(screen, Settings.PLAYER_COLOR, self.position, (nx, ny), 3)
 
         if self.ray_data:
-            for ray in self.ray_data:
-                blocks, hit_type = ray
-                if blocks:
-                    color = (100, 0, 100)
-                    if hit_type == 1:
-                        color = (100, 100, 100)
-                    elif type(hit_type) != int:
-                        color = (0, 100, 0)
-                    
-                    thickness = 1
 
-                    if len(self.ray_data) == 1:
-                        thickness = 4
+            if Settings.AGENT_DEBUG or len(self.ray_data) == 1:
+                for ray in self.ray_data:
+                    blocks, hit_type = ray
+                    if blocks:
+                        color = (100, 0, 100)
+                        if hit_type == 1:
+                            color = (100, 100, 100)
+                        elif type(hit_type) != int:
+                            color = (0, 100, 0)
+                        
+                        thickness = 1
 
-                    pg.draw.line(screen, color, self.position, blocks[-1], thickness) 
+                        if len(self.ray_data) == 1:
+                            thickness = 4
+
+                        pg.draw.line(screen, color, self.position, blocks[-1], thickness) 
                     
             self.ray_data = []
 
-        if Settings.AGENT_PLAYER:
+        if Settings.AGENT_PLAYER and Settings.AGENT_DEBUG:
             pg.draw.circle(screen, (0, 255, 0), self.position, Settings.AWARENESS_RANGE, 1)
 
     def on_collide(self, other):

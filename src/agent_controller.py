@@ -30,6 +30,10 @@ class AgentController(Controller):
         self.agent = Agent(Settings.ARCHITECTURE, Settings.LR, Settings.GAMMA, Settings.SAVE_INTERVAL, 
                            Settings.LOAD_MOST_RECENT_MODEL, Settings.SAVE_DIRECTORY)
 
+
+        if not Settings.LOAD_MOST_RECENT_MODEL:
+            self.agent._load_model(f"../models/chkpnt-{Settings.LOAD_MODEL_EPISODE}.h5")
+
     def reset_training_data(self):        
         self.states = []
         self.actions = []

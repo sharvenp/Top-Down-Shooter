@@ -52,6 +52,8 @@ class View:
             episode = player.controller.agent.current_episode
             start_time = t.time()
 
+        l = 0
+
         while True:
 
             player.reset((Settings.WIDTH//2, Settings.HEIGHT//2))
@@ -115,7 +117,11 @@ class View:
 
                 self._render_all()
                 # t.sleep(1/Settings.FRAME_RATE)
+                l += 1
+                pg.image.save(self.screen, f"../resources/generated_images/{Settings.LOAD_MODEL_EPISODE}/model-{Settings.LOAD_MODEL_EPISODE}-{l}.png")
 
+
+            exit(0)
             if Settings.AGENT_PLAYER:
                 episode += 1
                 player.controller.train_wrapper(episode)

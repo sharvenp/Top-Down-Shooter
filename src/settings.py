@@ -28,7 +28,8 @@ class Settings:
     GAMMA = 0.99
     SAVE_INTERVAL = 50
     SAVE_DIRECTORY = "../models"
-    LOAD_MOST_RECENT_MODEL = True
+    LOAD_MOST_RECENT_MODEL = False
+    LOAD_MODEL_EPISODE = 550
     KILL_REWARD = 100
     ALIVE_REWARD = 0.5
     DIE_REWARD = -500
@@ -37,7 +38,7 @@ class Settings:
     PLAYER_SIZE = 6
     PLAYER_MOVEMENT_SPEED = 5
     PLAYER_TURN_SPEED = 15
-    PLAYER_HEALTH = 2000
+    PLAYER_HEALTH = 200
     PLAYER_DAMAGE = 30
     PLAYER_SHOOT_RANGE = 300
     KILL_SCORE = 1
@@ -57,6 +58,6 @@ class Settings:
     SPAWN_UPPER_BOUND = 10
 
     # Misc
-    AGENT_DEBUG = 1
+    AGENT_DEBUG = 0
     AGENT_PLAYER = True
     DEBUG = 0
